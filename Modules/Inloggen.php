@@ -2,6 +2,8 @@
     function login($username, $password, $pdo)
     {
         // haal gegevens van de klant op
+        $sth = $pdo->prepare("SELECT * FROM users WHERE ")
+
         // $sth = $pdo->prepare etc..
         
         // if($sth->rowCount() == 1)
