@@ -14,10 +14,8 @@
 </head>
 
 <body>
-<div id="lol">
+<div id="MainNav">
 	Suck my dick
-	</div>
-	<div id="MainNav">
 		<nav>
 			<?php 
 				// TODO: Menu idee van Cinema7 gebruiken?
