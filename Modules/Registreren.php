@@ -7,14 +7,14 @@
     {
         $checkErrors = false;
 
+        $guid = CreateGuid();
         $firstName = $_POST["firstName"];
         $lastName = $_POST["lastName"];
-
         // haalt de whitespace weg
         $username = strtolower($firstName[0].$lastName);
         $username = str_replace(" ", "", $username);
-
         $role = $_POST["role"];
+        $class = $_POST["class"];
         $password = $_POST["password"];
         $retypePassword = $_POST["retypePassword"];
 
@@ -44,6 +44,7 @@
             $passwordErr = "Wachtwoord is niet gelijk";
             $checkErrors = true;
         }
+        // TODO: Moeten nog toevoegen om te kijken of de username al bestaat
 
 
         if($checkErrors)
@@ -53,18 +54,19 @@
         else
         {
             // Formulier is succesvol gevalideerd
-
             $salt = hash("sha512", uniqid(mt_rand(1, mt_getrandmax()), true));
-            $parameters = array(":FirstName"=>$firstName,
+            $parameters = array(":ID"=>$guid,
+                                ":FirstName"=>$firstName,
                                 ":LastName"=>$lastName,
                                 ":Username"=>$username,
                                 ":Role"=>$role,
+                                ":Class"=>$class,
                                 ":Password"=>SecurePassword($password, $salt),
                                 ":Salt"=>SecurePassword(NULL, $salt));
 
-            $sth = $pdo->prepare("INSERT INTO users (FirstName, LastName, Username, Role, Password, Salt)
-                                             VALUES (:FirstName, :LastName, :Username,
-                                             :Role, :Password, :Salt)");
+            $sth = $pdo->prepare("INSERT INTO users (ID, FirstName, LastName, Username, Role, Class, Password, Salt)
+                                             VALUES (:ID, :FirstName, :LastName, :Username, :Role,
+                                                     :Class, :Password, :Salt)");
 
             if($sth->execute($parameters))
             {
