@@ -29,16 +29,18 @@
         return true;
     }
 
-    function SecurePassword($password = NULL)
+    function SecurePassword($password = NULL, $salt = NULL)
     {
-        $salt = hash("sha512", uniqid(mt_rand(1, mt_getrandmax()), true));
+        // hier maken we nog een salt aan
         if(isset($password))
         {
             $password = hash("sha512", $password . $salt);
+            echo "<script>console.log('hashed: $password');</script>";
             return $password;
         }
         else
         {
+            // voor als de salt nodig hebben voor in de database
             return $salt;
         }
         
