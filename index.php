@@ -14,7 +14,9 @@
 </head>
 
 <body>
-
+<div id="lol">
+	Suck my dick
+	</div>
 	<div id="MainNav">
 		<nav>
 			<?php 
