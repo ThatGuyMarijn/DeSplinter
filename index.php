@@ -40,6 +40,12 @@
 					case 2:
 						require("./Modules/Registreren.php");
 						break;
+					case 10:
+						require("./Modules/LeerlingMenu.php");
+						break;
+					case 20:
+						require("./Modules/LerarenMenu.php");
+						break;
 					case 90:
 						require("./Modules/AdminOverzicht.php");
 						break;
