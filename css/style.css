@@ -4,16 +4,16 @@ body{
     font-family: Roboto, Arial, Helvetica, sans-serif;
     text-align: left; 
 }
-.lol{ 
+#lol{ 
     color: purple; 
     text-align: center;
     font-size: 80;
     text-transform: capitalize;
 }
-.MainNav{
+#MainNav{
 
 }
 
-.Main{
+#Main{
 
 }
