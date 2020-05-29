@@ -5,7 +5,7 @@
         $sth = $pdo->prepare("SELECT * FROM users WHERE Username = '$username'");
         $sth->execute();
         
-        if($sth->rowCount() != 0)
+        if($sth->rowCount() == 1)
         {
             $row = $sth->fetch();
 
@@ -13,9 +13,13 @@
 
             if($row["Password"] == $password)
             {
+                // TODO: kijken of dit weg kan
+                unset($_SESSION["username"]);
+                unset($_SESSION["role"]);
                 $_SESSION["user_id"] = $row["ID"];
                 $_SESSION["username"] = $row["Username"];
                 $_SESSION["role"] = $row["Role"];
+                $_SESSION["login_string"] = SecurePassword($password, $_SERVER["HTTP_USER_AGENT"]);
 
                 return true;
             }
@@ -37,12 +41,20 @@
 
         if(login($username, $password, $pdo))
         {
-            echo "Je bent succesvol ingelogd";
-            RedirectToPage(1, 0);
+            echo "<p>Je bent succesvol ingelogd</p>";
+            echo "<script>console.log('".$_SESSION["role"]."');</script>";
+            if($_SESSION["role"] == "Student")
+            {
+                RedirectToPage(2, 10);
+            }
+            if($_SESSION["role"] == "Teacher")
+            {
+                RedirectToPage(2, 20);
+            }
         }
         else
         {
-            echo "De gebruikersnaam of het wachtwoord is onjuist. <br />";
+            echo "<p>De gebruikersnaam of het wachtwoord is onjuist. <br /></p>";
             echo "<a href='./index.php?paginaNr=0'>Probeer opnieuw</a>";
         }
     }
