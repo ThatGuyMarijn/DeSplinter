@@ -25,8 +25,35 @@
 
     function LoginCheck($pdo)
     {
-        // TODO: LoginCheck moet nog gemaakt worden, overnemen van cinema7?
-        return true;
+        if(isset($_SESSION["user_id"], $_SESSION["username"], $_SESSION["role"]))
+        {
+            $parameters = array(":userID"=>$_SESSION["user_id"]);
+            echo "<script>console.log('userID = ".$_SESSION["user_id"]."');</script>";
+            $sth = $pdo->prepare("SELECT * FROM users WHERE ID=:userID");
+            $sth->execute($parameters);
+
+            if($sth->rowCount() == 1)
+            {
+                $row = $sth->fetch();
+                if(SecurePassword($row["Password"], $_SERVER["HTTP_USER_AGENT"]) == $_SESSION["login_string"])
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     function SecurePassword($password = NULL, $salt = NULL)
