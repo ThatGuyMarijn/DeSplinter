@@ -42,6 +42,18 @@
             // voor als de salt nodig hebben voor in de database
             return $salt;
         }
-        
+    }
+
+    function CreateGuid()
+    {
+        mt_srand((double)microtime()*10000);
+        $charID = strtoupper(md5(uniqid(rand(), true)));
+        $hypen = chr(45);
+        $uuid = substr($charID, 0, 8).$hypen
+            .substr($charID, 8, 4).$hypen
+            .substr($charID, 12, 4).$hypen
+            .substr($charID, 16, 4).$hypen
+            .substr($charID, 20, 12);
+        return $uuid;
     }
 ?>
