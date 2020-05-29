@@ -71,9 +71,39 @@
             if($sth->execute($parameters))
             {
                 echo "<p>Je hebt je succesvol geregistreerd en kan vanaf nu inloggen op de website.</p>";
-                // TODO: Redirect moet doorsturen naar Leraren overzicht, of leerlingen pagina
-                // deze heb ik nog niet aangemaakt dus weet nog niet welke paginaNr dat zullen worden
-                RedirectToPage(5, 0);
+                $sth = $pdo->prepare("SELECT * FROM classes WHERE Class=$class");
+                $sth->execute();
+                
+                if($role == "Student")
+                {
+                    // Leerlingen registratie
+
+                    $classRow = $sth->fetch();
+                    $classID = $classRow["ClassID"];
+                    // $guid is userID
+                    $sth = $pdo->prepare("INSERT INTO student_class (StudentID, ClassID)
+                                                    VALUES ('$guid', '$classID')");
+                    $sth->execute();
+
+                    // Stuurt je over 5 seconden naar de LeerlingenMenu.php (Leerlingen Hoofdpagina)
+                    RedirectToPage(5, 10);
+                }
+                elseif($role == "Teacher")
+                {
+                    // Leraren registratie
+                    if(!$sth->rowCount() == 1)
+                    {
+                        // Hier bestaat de klas nog niet, dus we maken hem aan
+                        $classID = CreateGuid();
+
+                        $sth = $pdo->prepare("INSERT INTO classes (ClassID, Class, TeacherID)
+                                                        VALUES ('$classID', '$class', '$guid')");
+
+                        $sth->execute();
+
+                        RedirectToPage(5, 20);
+                    }
+                }
             }
         }
     }
