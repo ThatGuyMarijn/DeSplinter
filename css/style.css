@@ -5,6 +5,12 @@ body{
     font-family: Roboto, Arial, Helvetica, sans-serif;
     text-align: left; 
 }
+.lol{ 
+    color: purple; 
+    text-align: center;
+    font-size: 80;
+    text-transform: capitalize;
+}
 .MainNav{
 
 }

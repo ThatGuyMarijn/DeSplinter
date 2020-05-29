@@ -6,14 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <title>Rekenwebsite - De Splinter</title>
-</head>
-
-<body>
-	<?php
+  <?php
 		session_start();
 		require("./Configuratie.php");
 		require("./Modules/Functies.php");
 	?>
+</head>
+
+<body>
+
 	<div id="MainNav">
 		<nav>
 			<?php 
