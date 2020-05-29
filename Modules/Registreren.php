@@ -9,13 +9,15 @@
 
         $firstName = $_POST["firstName"];
         $lastName = $_POST["lastName"];
+
+        // haalt de whitespace weg
         $username = strtolower($firstName[0].$lastName);
+        $username = str_replace(" ", "", $username);
+
         $role = $_POST["role"];
         $password = $_POST["password"];
         $retypePassword = $_POST["retypePassword"];
-        // to be expanded
 
-        // TODO: moet nog kijken of deze preg_match juist werkt
         if(preg_match("/[^A-Za-z]/", $firstName))
         {
             $fNameErr = "Je kunt alleen letters gebruiken.";
@@ -52,16 +54,12 @@
         else
         {
             // Formulier is succesvol gevalideerd
-            
-            // $password wordt nu het beveiligde wachtwoord die we in de database kunnen stoppen
-            $salt = hash("sha512", uniqid(mt_rand(1, mt_getrandmax()), true));
-            $password = hash("sha512", $password . $salt);
             $parameters = array(":FirstName"=>$firstName,
                                 ":LastName"=>$lastName,
                                 ":Username"=>$username,
                                 ":Role"=>$role,
-                                ":Password"=>$password,
-                                ":Salt"=>$salt);
+                                ":Password"=>SecurePassword($password),
+                                ":Salt"=>SecurePassword());
 
             $sth = $pdo->prepare("INSERT INTO users (FirstName, LastName, Username, Role, Password, Salt)
                                              VALUES (:FirstName, :LastName, :Username,

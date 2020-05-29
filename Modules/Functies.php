@@ -28,4 +28,19 @@
         // TODO: LoginCheck moet nog gemaakt worden, overnemen van cinema7?
         return true;
     }
+
+    function SecurePassword($password = NULL)
+    {
+        $salt = hash("sha512", uniqid(mt_rand(1, mt_getrandmax()), true));
+        if(isset($password))
+        {
+            $password = hash("sha512", $password . $salt);
+            return $password;
+        }
+        else
+        {
+            return $salt;
+        }
+        
+    }
 ?>
