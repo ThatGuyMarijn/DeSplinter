@@ -1,9 +1,4 @@
-<html>
-  <head>
-    <title>AdminOverzicht</title>
-        <link href="../css/style.css" type="text/css" rel="stylesheet"/>
-    </head>
-  <body>
+
 <?php
     if(LoginCheck(($pdo)))
     {
@@ -25,6 +20,3 @@
         RedirectToPage();
     }
 ?>
-
-</body>
-</html>
