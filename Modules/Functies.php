@@ -35,7 +35,6 @@
         if(isset($password))
         {
             $password = hash("sha512", $password . $salt);
-            echo "<script>console.log('hashed: $password');</script>";
             return $password;
         }
         else

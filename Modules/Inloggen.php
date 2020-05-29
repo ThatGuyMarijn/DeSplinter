@@ -5,17 +5,14 @@
         $sth = $pdo->prepare("SELECT * FROM users WHERE Username = '$username'");
         $sth->execute();
         
-        echo "<script>console.log('".$sth->rowCount()."');</script>";
         if($sth->rowCount() != 0)
         {
             $row = $sth->fetch();
 
             $password = SecurePassword($password, $row["Salt"]);
-            echo "<script>console.log('hashed: $password');</script>";
 
             if($row["Password"] == $password)
             {
-                $user_browser = $_SERVER["HTTP_USER_AGENT"];
                 $_SESSION["user_id"] = $row["ID"];
                 $_SESSION["username"] = $row["Username"];
                 $_SESSION["role"] = $row["Role"];

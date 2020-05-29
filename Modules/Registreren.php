@@ -29,7 +29,6 @@
             $lNameErr = "Je kunt alleen letters gebruiken.";
             $checkErrors = true;
         }
-        // hieronder komen nog meer error checks
 
         if($password == $retypePassword)
         {
