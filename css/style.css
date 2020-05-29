@@ -1,3 +1,7 @@
-.LoginForm input {
-	margin-left: 20px;
+
+body{
+    background-color: #ccff77;
+    color: green;
+    font-family: Helvetica;
+    text-align: justify; 
 }
