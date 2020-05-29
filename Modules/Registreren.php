@@ -54,12 +54,14 @@
         else
         {
             // Formulier is succesvol gevalideerd
+
+            $salt = hash("sha512", uniqid(mt_rand(1, mt_getrandmax()), true));
             $parameters = array(":FirstName"=>$firstName,
                                 ":LastName"=>$lastName,
                                 ":Username"=>$username,
                                 ":Role"=>$role,
-                                ":Password"=>SecurePassword($password),
-                                ":Salt"=>SecurePassword());
+                                ":Password"=>SecurePassword($password, $salt),
+                                ":Salt"=>SecurePassword(NULL, $salt));
 
             $sth = $pdo->prepare("INSERT INTO users (FirstName, LastName, Username, Role, Password, Salt)
                                              VALUES (:FirstName, :LastName, :Username,
