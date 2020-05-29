@@ -2,18 +2,35 @@
     function login($username, $password, $pdo)
     {
         // haal gegevens van de klant op
-        $sth = $pdo->prepare("SELECT * FROM users WHERE ")
-
-        // $sth = $pdo->prepare etc..
+        $sth = $pdo->prepare("SELECT * FROM users WHERE Username = '$username'");
+        $sth->execute();
         
-        // if($sth->rowCount() == 1)
-        // {
-        //     $row = $sth->fetch();
-        // }
-        // else
-        // {
-        //     return false;
-        // }
+        echo "<script>console.log('".$sth->rowCount()."');</script>";
+        if($sth->rowCount() != 0)
+        {
+            $row = $sth->fetch();
+
+            $password = SecurePassword($password, $row["Salt"]);
+            echo "<script>console.log('hashed: $password');</script>";
+
+            if($row["Password"] == $password)
+            {
+                $user_browser = $_SERVER["HTTP_USER_AGENT"];
+                $_SESSION["user_id"] = $row["ID"];
+                $_SESSION["username"] = $row["Username"];
+                $_SESSION["role"] = $row["Role"];
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 
     if(isset($_POST["inloggen"]))
