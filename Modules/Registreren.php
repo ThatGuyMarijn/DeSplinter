@@ -70,15 +70,17 @@
 
             if($sth->execute($parameters))
             {
+                // TODO: Moeten de klas nog aanmaken als deze niet bestaat
+
+                // Voegt de Student / Leraar aan de klas toe
                 echo "<p>Je hebt je succesvol geregistreerd en kan vanaf nu inloggen op de website.</p>";
                 $sth = $pdo->prepare("SELECT * FROM classes WHERE Class=$class");
                 $sth->execute();
+                $classRow = $sth->fetch();
                 
                 if($role == "Student")
                 {
                     // Leerlingen registratie
-
-                    $classRow = $sth->fetch();
                     $classID = $classRow["ClassID"];
                     // $guid is userID
                     $sth = $pdo->prepare("INSERT INTO student_class (StudentID, ClassID)
