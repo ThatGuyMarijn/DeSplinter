@@ -21,6 +21,13 @@
                 $_SESSION["role"] = $row["Role"];
                 $_SESSION["login_string"] = SecurePassword($password, $_SERVER["HTTP_USER_AGENT"]);
 
+                $parameters = array(":StudentID"=>$_SESSION["user_id"]);
+                $sth = $pdo->prepare("SELECT ClassID FROM student_class WHERE StudentID=:StudentID");
+                $sth->execute($parameters);
+                $secondRow = $sth->fetch();
+
+                $_SESSION["class_id"] = $secondRow["ClassID"];
+
                 return true;
             }
             else
