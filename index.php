@@ -44,6 +44,9 @@
 					case 10:
 						require("./Modules/LeerlingMenu.php");
 						break;
+					case 11:
+						require("./Modules/Opdrachten.php");
+						break;
 					case 20:
 						require("./Modules/LerarenMenu.php");
 						break;
