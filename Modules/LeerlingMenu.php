@@ -3,13 +3,18 @@
     {
         if($_SESSION["role"] == "Student")
         {
-            
+            // hier komt de leerlingen pagina in
+            echo "<a href='./index.php?paginaNr=11'>Opdrachten</a>";
+        }
+        elseif($_SESSION["role"] == "Teacher")
+        {
+            // Redirect naar leraren pagina
+            RedirectToPage(0, 20);
         }
         else
         {
-            echo "Je hebt niet de juiste bevoegdheid voor deze pagina.";
-            // TODO: redirect de persoon terug naar zijn rol behorende home pagina
-            RedirectToPage(3, NULL);
+            // Redirect naar login pagina
+            RedirectToPage();
         }
     }
     else
