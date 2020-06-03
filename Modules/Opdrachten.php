@@ -12,6 +12,7 @@
             // TODO: dit is nog een WIP, en zal er misschien niet meer zo uit zien als het klaar is
             for($i = 0; $i < 1; $i++)
             {
+                // de numOne, numTwo in een array zetten?
                 $numOne = mt_rand(1, $_SESSION["maxValue"]);
                 $numTwo = mt_rand(1, $_SESSION["maxValue"]);
 
