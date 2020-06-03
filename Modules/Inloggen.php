@@ -42,7 +42,6 @@
         if(login($username, $password, $pdo))
         {
             echo "<p>Je bent succesvol ingelogd</p>";
-            echo "<script>console.log('".$_SESSION["role"]."');</script>";
             if($_SESSION["role"] == "Student")
             {
                 RedirectToPage(2, 10);
