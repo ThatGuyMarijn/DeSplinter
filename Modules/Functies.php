@@ -83,4 +83,31 @@
             .substr($charID, 20, 12);
         return $uuid;
     }
+
+    function TaskSetup($pdo)
+    {
+        // haalt de groep/klas uit de database (4, 5, 6)
+        $parameters = array(":ClassID"=>$_SESSION["class_id"]);
+        $sth = $pdo->prepare("SELECT Class FROM classes WHERE ClassID=:ClassID");
+        $sth->execute($parameters);
+        $row = $sth->fetch();
+
+        $_SESSION["operators"] = array();
+
+        if($row["Class"] == "4")
+        {
+            $_SESSION["maxValue"] = 10;
+            array_push($_SESSION["operators"], "+", "-", "*");
+        }
+        elseif($row["Class"] == "5")
+        {
+            $_SESSION["maxValue"] = 100;
+            array_push($_SESSION["operators"], "+", "-", "*", "/");
+        }
+        elseif($row["Class"] == "6")
+        {
+            $_SESSION["maxValue"] = 1000;
+            array_push($_SESSION["operators"], "+", "-", "*", "/");
+        }
+    }
 ?>
