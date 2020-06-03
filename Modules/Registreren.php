@@ -94,6 +94,7 @@
                     if(!$sth->rowCount() == 1)
                     {
                         // Hier bestaat de klas nog niet, dus we maken hem aan
+                        // hier komen we in principe niet omdat ze maar 3 klassen hebben (4, 5, 6)
                         $classID = CreateGuid();
 
                         $sth = $pdo->prepare("INSERT INTO classes (ClassID, Class, TeacherID)
