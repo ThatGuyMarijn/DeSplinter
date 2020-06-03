@@ -9,6 +9,7 @@
             // zorgt dat de student de juiste sommen en operators krijgt
             TaskSetup($pdo);
 
+            // TODO: dit is nog een WIP, en zal er misschien niet meer zo uit zien als het klaar is
             for($i = 0; $i < 1; $i++)
             {
                 $numOne = mt_rand(1, $_SESSION["maxValue"]);
