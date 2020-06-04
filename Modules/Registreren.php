@@ -11,7 +11,7 @@
         $firstName = $_POST["firstName"];
         $lastName = $_POST["lastName"];
         // haalt de whitespace weg
-        $username = strtolower($firstName[0].$lastName);
+        $username = strtolower($firstName.$lastName);
         $username = str_replace(" ", "", $username);
         $role = $_POST["role"];
         $class = $_POST["class"];
