@@ -15,7 +15,6 @@
 
 <body>
 <div id="MainNav">
-	Suck my dick
 		<nav>
 			<?php 
 				// TODO: Menu idee van Cinema7 gebruiken?
