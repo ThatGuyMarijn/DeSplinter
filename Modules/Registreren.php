@@ -18,6 +18,8 @@
         $password = $_POST["password"];
         $retypePassword = $_POST["retypePassword"];
 
+        // TODO: Check if username doesnt already exist?
+
         if(preg_match("/[^A-Za-z]/", $firstName))
         {
             $fNameErr = "Je kunt alleen letters gebruiken.";
