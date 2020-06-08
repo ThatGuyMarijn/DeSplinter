@@ -28,7 +28,6 @@
         if(isset($_SESSION["user_id"], $_SESSION["username"], $_SESSION["role"]))
         {
             $parameters = array(":userID"=>$_SESSION["user_id"]);
-            echo "<script>console.log('userID = ".$_SESSION["user_id"]."');</script>";
             $sth = $pdo->prepare("SELECT * FROM users WHERE ID=:userID");
             $sth->execute($parameters);
 
