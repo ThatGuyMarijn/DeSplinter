@@ -36,12 +36,13 @@
                 if($correctAnswer == $answer)
                 {
                     // je antwoord is goed
+                    echo "<script>console.log('Correct Answer');</script>";
 
                 }
                 else
                 {
                     // je antwoord is fout
-
+                    echo "<script>console.log('Wrong Answer');</script>";
                 }
             }
             else
