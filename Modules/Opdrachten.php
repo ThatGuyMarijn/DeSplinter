@@ -6,33 +6,77 @@
     {
         if($_SESSION["role"] == "Student")
         {
-            // zorgt dat de student de juiste sommen en operators krijgt
-            TaskSetup($pdo);
+            
 
             // TODO: dit is nog een WIP, en zal er misschien niet meer zo uit zien als het klaar is
-            for($i = 0; $i < 1; $i++)
+            if(isset($_POST["opdrachten"]))
             {
-                // de numOne, numTwo in een array zetten?
-                $numOne = mt_rand(1, $_SESSION["maxValue"]);
-                $numTwo = mt_rand(1, $_SESSION["maxValue"]);
-
-                $x = array_rand($_SESSION["operators"]);
-                switch($_SESSION["operators"][$x])
+                // opdracht is gesubmit
+                $answer = $_POST["answer"];
+                $numOne = $_POST["numOne"];
+                $numTwo = $_POST["numTwo"];
+                $currentOperator = $_POST["currentOperator"];
+               
+                switch($currentOperator)
                 {
                     case "+":
-                        echo "<p>$numOne + $numTwo = </p>";
+                        $correctAnswer = $numOne + $numTwo;
                         break;
                     case "-":
-                        echo "<p>$numOne - $numTwo = </p>";
+                        $correctAnswer = $numOne - $numTwo;
                         break;
-                    case "*":
-                        echo "<p>$numOne x $numTwo = </p>";
+                    case "x":
+                        $correctAnswer = $numOne * $numTwo;
                         break;
                     case "/":
-                        echo "<p>$numOne / $numTwo = </p>";
+                        $correctAnswer = $numOne / $numTwo;
                         break;
                 }
-                // end of forloop
+                
+                if($correctAnswer == $answer)
+                {
+                    // je antwoord is goed
+
+                }
+                else
+                {
+                    // je antwoord is fout
+
+                }
+            }
+            else
+            {
+                // opdracht is nog niet gesubmit
+                
+
+                for($i = 0; $i < 1; $i++)
+                {
+                    // de numOne, numTwo in een array zetten?
+                    $numOne = mt_rand(1, $_SESSION["maxValue"]);
+                    $numTwo = mt_rand(1, $_SESSION["maxValue"]);
+
+                    $x = array_rand($_SESSION["operators"]);
+                    switch($_SESSION["operators"][$x])
+                    {
+                        case "+":
+                            $currentOperator = "+";
+                            require("./Forms/OpdrachtenForm.php");
+                            break;
+                        case "-":
+                            $currentOperator = "-";
+                            require("./Forms/OpdrachtenForm.php");
+                            break;
+                        case "*":
+                            $currentOperator = "x";
+                            require("./Forms/OpdrachtenForm.php");
+                            break;
+                        case "/":
+                            $currentOperator = "/";
+                            require("./Forms/OpdrachtenForm.php");
+                            break;
+                    }
+                    // end of forloop
+                }
             }
         }
         else
