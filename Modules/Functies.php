@@ -42,7 +42,6 @@
                 {
                     return false;
                 }
-                
             }
             else
             {
@@ -81,6 +80,25 @@
             .substr($charID, 16, 4).$hypen
             .substr($charID, 20, 12);
         return $uuid;
+    }
+
+    function CheckTask($numOne, $operator, $numTwo)
+    {
+        switch($operator)
+        {
+            case "+":
+                return $numOne + $numTwo;
+                break;
+            case "-":
+                return $numOne - $numTwo;
+                break;
+            case "*":
+                return $numOne * $numTwo;
+                break;
+            case "/":
+                return $numOne / $numTwo;
+                break;
+        }
     }
 
     function TaskSetup($pdo)
