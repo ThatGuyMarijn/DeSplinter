@@ -6,8 +6,6 @@
     {
         if($_SESSION["role"] == "Student")
         {
-            
-
             // TODO: dit is nog een WIP, en zal er misschien niet meer zo uit zien als het klaar is
             if(isset($_POST["opdrachten"]))
             {
@@ -56,8 +54,7 @@
                     $numOne = mt_rand(1, $_SESSION["maxValue"]);
                     $numTwo = mt_rand(1, $_SESSION["maxValue"]);
 
-                    $x = array_rand($_SESSION["operators"]);
-                    switch($_SESSION["operators"][$x])
+                    switch($_SESSION["operators"][array_rand($_SESSION["operators"])])
                     {
                         case "+":
                             $currentOperator = "+";
