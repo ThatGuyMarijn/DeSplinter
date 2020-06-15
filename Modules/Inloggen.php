@@ -27,7 +27,7 @@
                 $secondRow = $sth->fetch();
 
                 $_SESSION["class_id"] = $secondRow["ClassID"];
-
+                echo "<script>console.log('ik geef true');</script>";
                 return true;
             }
             else
@@ -41,31 +41,38 @@
         }
     }
 
-    if(isset($_POST["inloggen"]))
+    // kijkt of de user al ingelogd is
+    // misschien LoginCheck gebruiken?
+    if($_SESSION["role"] == "Teacher" || $_SESSION["role"] == "Student")
     {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-
-        if(login($username, $password, $pdo))
+        if(isset($_POST["inloggen"]))
         {
-            echo "<p>Je bent succesvol ingelogd</p>";
-            if($_SESSION["role"] == "Student")
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+
+            if(login($username, $password, $pdo))
             {
-                RedirectToPage(2, 10);
+                echo "<p>Je bent succesvol ingelogd</p>";
+                if($_SESSION["role"] == "Student")
+                {
+                    echo "<script>console.log('redirect naar 2, 10');</script>";
+                    RedirectToPage(2, 10);
+                }
+                if($_SESSION["role"] == "Teacher")
+                {
+                    echo "<script>console.log('redirect naar 2, 20');</script>";
+                    RedirectToPage(2, 20);
+                }
             }
-            if($_SESSION["role"] == "Teacher")
+            else
             {
-                RedirectToPage(2, 20);
+                echo "<p>De gebruikersnaam of het wachtwoord is onjuist. <br /></p>";
+                echo "<a href='./index.php?paginaNr=0'>Probeer opnieuw</a>";
             }
         }
         else
         {
-            echo "<p>De gebruikersnaam of het wachtwoord is onjuist. <br /></p>";
-            echo "<a href='./index.php?paginaNr=0'>Probeer opnieuw</a>";
+            require("./Forms/InloggenForm.php");
         }
-    }
-    else
-    {
-        require("./Forms/InloggenForm.php");
     }
 ?>
