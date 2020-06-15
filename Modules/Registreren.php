@@ -1,6 +1,7 @@
 <?php
     if(LoginCheck($pdo))
     {
+        // TODO: wil rol nog niet checken als je account maakt, moet nog oplossen
         if($_SESSION["role"] == "Teacher")
         {
 
