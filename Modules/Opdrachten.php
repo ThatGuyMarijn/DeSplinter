@@ -34,12 +34,14 @@
                 if($correctAnswer == $answer)
                 {
                     // je antwoord is goed
+                    echo "Goed geantwoord";
                     echo "<script>console.log('Correct Answer');</script>";
 
                 }
                 else
                 {
                     // je antwoord is fout
+                    echo "Fout geantwoord";
                     echo "<script>console.log('Wrong Answer');</script>";
                 }
             }
@@ -47,34 +49,37 @@
             {
                 // opdracht is nog niet gesubmit
                 
+                TaskSetup($pdo);
+                // moet nog een andere parameter komen, voor te kijken of de opdracht al gegenereerd is of niet en of hij klaar is
+                GenerateTasks(1);
 
-                for($i = 0; $i < 1; $i++)
-                {
-                    // de numOne, numTwo in een array zetten?
-                    $numOne = mt_rand(1, $_SESSION["maxValue"]);
-                    $numTwo = mt_rand(1, $_SESSION["maxValue"]);
+                // for($i = 0; $i < 1; $i++)
+                // {
+                //     // de numOne, numTwo in een array zetten?
+                //     $numOne = mt_rand(1, $_SESSION["maxValue"]);
+                //     $numTwo = mt_rand(1, $_SESSION["maxValue"]);
 
-                    switch($_SESSION["operators"][array_rand($_SESSION["operators"])])
-                    {
-                        case "+":
-                            $currentOperator = "+";
-                            require("./Forms/OpdrachtenForm.php");
-                            break;
-                        case "-":
-                            $currentOperator = "-";
-                            require("./Forms/OpdrachtenForm.php");
-                            break;
-                        case "*":
-                            $currentOperator = "x";
-                            require("./Forms/OpdrachtenForm.php");
-                            break;
-                        case "/":
-                            $currentOperator = "/";
-                            require("./Forms/OpdrachtenForm.php");
-                            break;
-                    }
-                    // end of forloop
-                }
+                //     switch($_SESSION["operators"][array_rand($_SESSION["operators"])])
+                //     {
+                //         case "+":
+                //             $currentOperator = "+";
+                //             require("./Forms/OpdrachtenForm.php");
+                //             break;
+                //         case "-":
+                //             $currentOperator = "-";
+                //             require("./Forms/OpdrachtenForm.php");
+                //             break;
+                //         case "*":
+                //             $currentOperator = "x";
+                //             require("./Forms/OpdrachtenForm.php");
+                //             break;
+                //         case "/":
+                //             $currentOperator = "/";
+                //             require("./Forms/OpdrachtenForm.php");
+                //             break;
+                //     }
+                //     // end of forloop
+                // }
             }
         }
         else
