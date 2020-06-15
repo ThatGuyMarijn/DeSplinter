@@ -127,4 +127,42 @@
             array_push($_SESSION["operators"], "+", "-", "*", "/");
         }
     }
+
+    // TODO: komt nog een extra parameter om te kijken of de opdracht al klaar is
+    //       zodat we de $_SESSION["tasks"] kunnen leegmaken
+    function GenerateTasks($totalTasks)
+    {
+        // Hoeveel sommen moet hij genereren?
+        for($i = 0; $i < $totalTasks; $i++)
+        {
+            $numOne = mt_rand(0, $_SESSION["maxValue"]);
+            $numTwo = mt_rand(0, $_SESSION["maxValue"]);
+
+            switch($_SESSION["operators"][array_rand($_SESSION["operators"])])
+            {
+                case "+":
+                    $currentOperator = "+";
+                    require("./Forms/OpdrachtenForm.php");
+                    break;
+                case "-":
+                    $currentOperator = "-";
+                    require("./Forms/OpdrachtenForm.php");
+                    break;
+                case "*":
+                    $currentOperator = "x";
+                    require("./Forms/OpdrachtenForm.php");
+                    break;
+                case "/":
+                    $currentOperator = "/";
+                    require("./Forms/OpdrachtenForm.php");
+                    break;
+            }
+
+            if(!isset($_SESSION["tasks"]))
+                $_SESSION["tasks"] = array();
+
+            array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
+        }
+        echo "<script>console.log('".json_encode($_SESSION["tasks"])."');</script>";
+    }
 ?>
