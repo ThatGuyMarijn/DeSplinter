@@ -159,11 +159,6 @@
                     require("./Forms/OpdrachtenForm.php");
                     break;
             }
-
-            // if(!isset($_SESSION["tasks"]))
-            //     $_SESSION["tasks"] = array();
-
-            // array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
         }
         
     }
