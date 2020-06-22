@@ -132,6 +132,8 @@
     //       zodat we de $_SESSION["tasks"] kunnen leegmaken
     function GenerateTasks($totalTasks)
     {
+        $_SESSION["tasks"] = array();
+
         // Hoeveel sommen moet hij genereren?
         for($i = 0; $i < $totalTasks; $i++)
         {
@@ -158,11 +160,11 @@
                     break;
             }
 
-            if(!isset($_SESSION["tasks"]))
-                $_SESSION["tasks"] = array();
+            // if(!isset($_SESSION["tasks"]))
+            //     $_SESSION["tasks"] = array();
 
-            array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
+            // array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
         }
-        echo "<script>console.log('".json_encode($_SESSION["tasks"])."');</script>";
+        
     }
 ?>
