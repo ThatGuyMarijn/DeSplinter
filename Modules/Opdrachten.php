@@ -31,9 +31,6 @@
                         break;
                 }
 
-                // if(isset($_SESSION["tasks"]))
-                //     $_SESSION["tasks"] = array();
-
                 array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo, $answer);
                 
                 if($correctAnswer == $answer)
@@ -57,7 +54,7 @@
                 
                 TaskSetup($pdo);
                 // moet nog een andere parameter komen, voor te kijken of de opdracht al gegenereerd is of niet en of hij klaar is
-                GenerateTasks(2);
+                GenerateTasks(1);
             }
         }
         else
