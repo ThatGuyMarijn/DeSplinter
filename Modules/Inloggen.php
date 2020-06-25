@@ -43,8 +43,8 @@
 
     // kijkt of de user al ingelogd is
     // misschien LoginCheck gebruiken?
-    if($_SESSION["role"] == "Teacher" || $_SESSION["role"] == "Student")
-    {
+    // if($_SESSION["role"] == "Teacher" || $_SESSION["role"] == "Student")
+    // {
         if(isset($_POST["inloggen"]))
         {
             $username = $_POST["username"];
@@ -56,12 +56,12 @@
                 if($_SESSION["role"] == "Student")
                 {
                     echo "<script>console.log('redirect naar 2, 10');</script>";
-                    RedirectToPage(2, 10);
+                    header("Refresh: 2;URL=index.php?paginaNr=10");
                 }
                 if($_SESSION["role"] == "Teacher")
                 {
                     echo "<script>console.log('redirect naar 2, 20');</script>";
-                    RedirectToPage(2, 20);
+                    header("Refresh: 2;URL=index.php?paginaNr=20");
                 }
             }
             else
@@ -74,5 +74,5 @@
         {
             require("./Forms/InloggenForm.php");
         }
-    }
+    //}
 ?>
