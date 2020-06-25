@@ -31,7 +31,11 @@
                         break;
                 }
 
-                array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo, $answer);
+                // pushed de som naar de 'tasks' array
+                //array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
+
+                // pushed het antwoord en het juiste antwoord naar de 'answers' array
+                array_push($_SESSION["answers"], $answer, $correctAnswer);
                 
                 if($correctAnswer == $answer)
                 {
