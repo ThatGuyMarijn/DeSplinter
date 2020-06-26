@@ -128,11 +128,10 @@
         }
     }
 
-    // TODO: komt nog een extra parameter om te kijken of de opdracht al klaar is
-    //       zodat we de $_SESSION["tasks"] kunnen leegmaken
     function GenerateTasks($totalTasks)
     {
         $_SESSION["tasks"] = array();
+        $_SESSION["answers"] = array();
 
         // Hoeveel sommen moet hij genereren?
         for($i = 0; $i < $totalTasks; $i++)
@@ -140,26 +139,48 @@
             $numOne = mt_rand(0, $_SESSION["maxValue"]);
             $numTwo = mt_rand(0, $_SESSION["maxValue"]);
 
+            
             switch($_SESSION["operators"][array_rand($_SESSION["operators"])])
             {
                 case "+":
                     $currentOperator = "+";
-                    require("./Forms/OpdrachtenForm.php");
                     break;
                 case "-":
                     $currentOperator = "-";
-                    require("./Forms/OpdrachtenForm.php");
                     break;
                 case "*":
                     $currentOperator = "x";
-                    require("./Forms/OpdrachtenForm.php");
                     break;
                 case "/":
                     $currentOperator = "/";
-                    require("./Forms/OpdrachtenForm.php");
                     break;
             }
+
+            //require("./Forms/OpdrachtenForm.php");
+            
+            // pushed de som naar de 'tasks' array
+            array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
+        }
+    }
+
+    function CheckAnswer($numOne, $currentOperator, $numTwo)
+    {
+        switch($currentOperator)
+        {
+            case "+":
+                $correctAnswer = $numOne + $numTwo;
+                break;
+            case "-":
+                $correctAnswer = $numOne - $numTwo;
+                break;
+            case "x":
+                $correctAnswer = $numOne * $numTwo;
+                break;
+            case "/":
+                $correctAnswer = $numOne / $numTwo;
+                break;
         }
         
+        return $correctAnswer;
     }
 ?>
