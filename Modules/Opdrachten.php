@@ -10,55 +10,61 @@
             if(isset($_POST["opdrachten"]))
             {
                 // opdracht is gesubmit
-                $answer = $_POST["answer"];
-                $numOne = $_POST["numOne"];
-                $numTwo = $_POST["numTwo"];
-                $currentOperator = $_POST["currentOperator"];
-               
-                switch($currentOperator)
+                // looped door elke opdracht/antwoord
+                for($i = 0; $i < count($_SESSION["tasks"]); $i++)
                 {
-                    case "+":
-                        $correctAnswer = $numOne + $numTwo;
-                        break;
-                    case "-":
-                        $correctAnswer = $numOne - $numTwo;
-                        break;
-                    case "x":
-                        $correctAnswer = $numOne * $numTwo;
-                        break;
-                    case "/":
-                        $correctAnswer = $numOne / $numTwo;
-                        break;
+                    $numOne = $_SESSION["tasks"][$i];
+                    $currentOperator = $_SESSION["tasks"][$i+1];
+                    $numTwo = $_SESSION["tasks"][$i+2];
+                    $answer = $_POST["answer$i"];
+
+                    // haalt het correcte antwoord uit de functie
+                    $correctAnswer = CheckAnswer($numOne, $currentOperator, $numTwo);
+
+                    // zet het antwoord en het juiste antwoord in een array
+                    array_push($_SESSION["answers"], $answer, $correctAnswer);
+
+                    $i += 2;
                 }
 
-                // pushed de som naar de 'tasks' array
-                //array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
+                // Kijken hoeveel opdrachten je daadwerkelijk goed hebt
 
-                // pushed het antwoord en het juiste antwoord naar de 'answers' array
-                array_push($_SESSION["answers"], $answer, $correctAnswer);
+                $totalCorrectAnswers = 0;
+                $totalFailedAnswers = 0;
+
+                for($i = 0; $i < count($_SESSION["answers"]); $i++)
+                {
+                    $answer = $_SESSION["answers"][$i];
+                    $correctAnswer = $_SESSION["answers"][$i+1];
+
+                    if($answer == $correctAnswer)
+                        $totalCorrectAnswers++;
+                    else
+                        $totalFailedAnswers++;
+
+                    $i += 1;
+                }
+
+                $parameters = array(":Guid"=>CreateGuid(),
+                                    ":StudentID"=>$_SESSION["user_id"],
+                                    ":Date"=>date("Y-m-d H:i:s"),
+                                    ":Type"=>"Oefening",
+                                    ":Correct"=>$totalCorrectAnswers);
+                $sth = $pdo->prepare("INSERT INTO progress (ID, StudentID, Date, Type, Correct)
+                                                    VALUES (:Guid, :StudentID, :Date, :Type, :Correct)");
                 
-                if($correctAnswer == $answer)
+                if($sth->execute($parameters))
                 {
-                    // je antwoord is goed
-                    echo "Goed geantwoord";
-                    echo "<script>console.log('Correct Answer');</script>";
-
+                    // Succesvol geexecute
+                    echo "<script>console.log('saved');</script>";
                 }
-                else
-                {
-                    // je antwoord is fout
-                    echo "Fout geantwoord";
-                    echo "<script>console.log('Wrong Answer');</script>";
-                }
-                echo "<script>console.log('".json_encode($_SESSION["tasks"])."');</script>";
             }
             else
             {
                 // opdracht is nog niet gesubmit
-                
                 TaskSetup($pdo);
-                // moet nog een andere parameter komen, voor te kijken of de opdracht al gegenereerd is of niet en of hij klaar is
-                GenerateTasks(1);
+                GenerateTasks(10);
+                require("./Forms/OpdrachtenForm.php");
             }
         }
         else
