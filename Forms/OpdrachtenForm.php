@@ -1,11 +1,12 @@
 <form method="POST">
-    <?php echo "<label>$numOne $currentOperator $numTwo = </label>";?>
-    <input type="number" name="answer" />
-    <br />
-    <input type="submit" name="opdrachten" value="Volgende" />
-
-    <input type="hidden" name="numOne" value="<?php echo $numOne;?>" />
-    <input type="hidden" name="currentOperator" value="<?php echo $currentOperator;?>" />
-    <input type="hidden" name="numTwo" value="<?php echo $numTwo;?>" />
+    <?php for($i = 0; $i < count($_SESSION["tasks"]); $i++)
+        {
+            echo "<label>".$_SESSION["tasks"][$i].$_SESSION["tasks"][$i+1].$_SESSION["tasks"][$i+2]."=</label>";
+            echo "<input type='number' name='answer$i' />";
+            echo "<br />";
+            $i += 2;
+        }
+        echo "<input type='submit' name='opdrachten' value='Volgende' />";
+        ?>
 </form>
 <br />
