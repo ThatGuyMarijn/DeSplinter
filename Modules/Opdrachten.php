@@ -57,6 +57,18 @@
                 {
                     // Succesvol geexecute
                     echo "<script>console.log('saved');</script>";
+
+
+                    // Activiteit ook nog opslaan naar de activities tabel
+                    // zodat de leerlaar kan zien dat de leerling klaar is in het leraren menu
+                    $parameters = array(":Guid"=>CreateGuid(),
+                                        ":UserID"=>$_SESSION["user_id"],
+                                        ":Activity"=>$_SESSION["username"]." heeft zojuist een opdracht voltooid",
+                                        ":Time"=>date("Y-m-d H:i:s"));
+                    $sth = $pdo->prepare("INSERT INTO activities (ID, UserID, Activity, Time)
+                                                        VALUES (:Guid, :UserID, :Activity, :Time)");
+                    
+                    $sth->execute($parameters);
                 }
             }
             else
