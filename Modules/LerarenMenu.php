@@ -1,10 +1,34 @@
 <?php
     if(LoginCheck($pdo))
     {
-        if($_SESSION["role"] == "Teacher")
+        if($_SESSION["role"] == "Student")
         {
-            echo "<script>console.log('lerarenmenu is hier');</script>";
             // Hier komt de leraren pagina
+            echo "<h2>Activiteiten Logboek</h2>";
+            $sth = $pdo->prepare("SELECT Activity, Time FROM activities ORDER BY Time DESC");
+            $sth->execute();
+
+            echo
+            "
+            <table>
+                <tr>
+                    <th>Activiteit<th>
+                    <th>Datum</th>
+                </tr>
+            ";
+            while($row = $sth->fetch())
+            {
+                echo "<tr>";
+                echo "<td>" . $row["Activity"] . "</td>";
+                echo "<td>" . $row["Time"] . "</td>";
+                echo "</tr>";
+            }
+            echo
+            "
+            </table>
+            ";
+
+
         }
         elseif($_SESSION["role"] == "Student")
         {
