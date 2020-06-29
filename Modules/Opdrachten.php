@@ -62,9 +62,7 @@
 
                     // Activiteit ook nog opslaan naar de activities tabel
                     // zodat de leerlaar kan zien dat de leerling klaar is in het leraren menu
-
-                    //$_SESSION["class_id"]
-
+                    
                     // Kies de leraar om met de activiteiten te koppelen
                     $parameters = array(":ClassID"=>$_SESSION["class_id"]);
                     $sth = $pdo->prepare("SELECT TeacherID FROM classes WHERE ClassID=:ClassID LIMIT 1");
