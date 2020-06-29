@@ -128,7 +128,27 @@
         }
     }
 
-    function GenerateTasks($totalTasks)
+    function GetOperator($curOp)
+    {
+        switch($curOp)
+        {
+            case "plus":
+                $newOp = "+";
+                break;
+            case "min":
+                $newOp = "-";
+                break;
+            case "keer":
+                $newOp = "x";
+                break;
+            case "deel":
+                $newOp = "/";
+                break;
+        }
+        return $newOp;
+    }
+
+    function GenerateTasks($totalTasks, $operator = NULL)
     {
         $_SESSION["tasks"] = array();
         $_SESSION["answers"] = array();
@@ -136,27 +156,31 @@
         // Hoeveel sommen moet hij genereren?
         for($i = 0; $i < $totalTasks; $i++)
         {
-            $numOne = mt_rand(0, $_SESSION["maxValue"]);
-            $numTwo = mt_rand(0, $_SESSION["maxValue"]);
+            $numOne = mt_rand(1, $_SESSION["maxValue"]);
+            $numTwo = mt_rand(1, $_SESSION["maxValue"]);
 
-            
-            switch($_SESSION["operators"][array_rand($_SESSION["operators"])])
+            if(!isset($operator))
             {
-                case "+":
-                    $currentOperator = "+";
-                    break;
-                case "-":
-                    $currentOperator = "-";
-                    break;
-                case "*":
-                    $currentOperator = "x";
-                    break;
-                case "/":
-                    $currentOperator = "/";
-                    break;
+                switch($_SESSION["operators"][array_rand($_SESSION["operators"])])
+                {
+                    case "+":
+                        $currentOperator = "+";
+                        break;
+                    case "-":
+                        $currentOperator = "-";
+                        break;
+                    case "*":
+                        $currentOperator = "x";
+                        break;
+                    case "/":
+                        $currentOperator = "/";
+                        break;
+                }
             }
-
-            //require("./Forms/OpdrachtenForm.php");
+            else
+            {
+                $currentOperator = $operator;
+            }
             
             // pushed de som naar de 'tasks' array
             array_push($_SESSION["tasks"], $numOne, $currentOperator, $numTwo);
