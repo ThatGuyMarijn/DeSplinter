@@ -5,8 +5,9 @@
         <th>Datum</th>
     </tr>
     <?php
-        $sth = $pdo->prepare("SELECT Activity, Time FROM activities ORDER BY Time DESC");
-        $sth->execute();
+        $parameters = array(":TeacherID"=>$_SESSION["user_id"]);
+        $sth = $pdo->prepare("SELECT Activity, Time FROM activities WHERE TeacherID=:TeacherID ORDER BY Time DESC");
+        $sth->execute($parameters);
 
         while($row = $sth->fetch())
         {
