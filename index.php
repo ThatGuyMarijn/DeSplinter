@@ -24,7 +24,7 @@
 
 				$pdo = ConnectDB();
 			?>
-			test
+			
 		</nav>
 	</div>
 	<div id="Main">
