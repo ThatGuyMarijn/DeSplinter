@@ -1,8 +1,7 @@
 <?php
     if(LoginCheck($pdo))
-    {
-        // TODO: Student naar Teacher veranderen
-        if($_SESSION["role"] == "Student")
+    { 
+        if($_SESSION["role"] == "Teacher")
         {
             // Hier komt de leraren pagina
             
@@ -10,6 +9,7 @@
             require("./Modules/ActiviteitenLogboek.php");
 
             // laad de klassen
+            require("./Modules/Klassen.php");
 
 
         }
