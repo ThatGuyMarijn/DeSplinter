@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" media= "screen" href="css/style.css" >
+  <link href="css/style.css" type="text/css"  rel="stylesheet" />
   <title>Rekenwebsite - De Splinter</title>
   <?php
 		session_start();
@@ -24,6 +24,7 @@
 
 				$pdo = ConnectDB();
 			?>
+			test
 		</nav>
 	</div>
 	<div id="Main">

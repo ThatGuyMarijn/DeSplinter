@@ -1,17 +1,13 @@
 body{
-    background-color: red;
+    background-color: red ; 
     color: black;
     font-family: Roboto, Arial, Helvetica, sans-serif;
     text-align: left; 
 }
 
 #MainNav{
-    color: purple; 
+    color: red; 
     text-align: center;
     font-size: 12px;
     text-transform: capitalize;
-}
-
-#Main{
-
 }
