@@ -62,12 +62,25 @@
 
                     // Activiteit ook nog opslaan naar de activities tabel
                     // zodat de leerlaar kan zien dat de leerling klaar is in het leraren menu
+
+                    //$_SESSION["class_id"]
+
+                    // Kies de leraar om met de activiteiten te koppelen
+                    $parameters = array(":ClassID"=>$_SESSION["class_id"]);
+                    $sth = $pdo->prepare("SELECT TeacherID FROM classes WHERE ClassID=:ClassID LIMIT 1");
+                    $sth->execute($parameters);
+                    while($row = $sth->fetch())
+                    {
+                        $teacherID = $row["TeacherID"];
+                    }
+
                     $parameters = array(":Guid"=>CreateGuid(),
                                         ":UserID"=>$_SESSION["user_id"],
+                                        ":TeacherID"=>$teacherID,
                                         ":Activity"=>$_SESSION["username"]." heeft zojuist een opdracht voltooid",
                                         ":Time"=>date("Y-m-d H:i:s"));
-                    $sth = $pdo->prepare("INSERT INTO activities (ID, UserID, Activity, Time)
-                                                        VALUES (:Guid, :UserID, :Activity, :Time)");
+                    $sth = $pdo->prepare("INSERT INTO activities (ID, UserID, TeacherID, Activity, Time)
+                                                        VALUES (:Guid, :UserID, :TeacherID, :Activity, :Time)");
                     
                     $sth->execute($parameters);
 
