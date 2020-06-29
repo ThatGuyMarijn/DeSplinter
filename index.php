@@ -24,7 +24,7 @@
 
 				$pdo = ConnectDB();
 			?>
-			
+			Rekensplinter
 		</nav>
 	</div>
 	<div id="Main">

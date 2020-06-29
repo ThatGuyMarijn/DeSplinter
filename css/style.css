@@ -2,16 +2,47 @@ html{
     height: 100%;   
 }
 body{
-    background: linear-gradient(#e66465, #9198e5);
+    background: linear-gradient( #3DACCC 60%,rgb(148, 221, 241) );
     min-height: 100%; 
-    color: black;
+    height: 100%; 
     font-family: Roboto, Arial, Helvetica, sans-serif;
     text-align: left; 
 }
 
 #MainNav{
-    color: red; 
-    text-align: center;
-    font-size: 12px;
-    text-transform: capitalize;
+    /*Size banner*/
+        width: 80%;
+        margin: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        height: 16%;
+        padding: 5px;
+        position: relative;
+        /*Look banner*/
+            border: 2px solid black;
+            color: red; 
+            background: greenyellow;
+            background-image: url("../img/Gras.jpg");
+            background-position: center center;
+            background-size: contain;
+            /*Tekst banner */
+                font-family: Roboto, Arial, Helvetica, sans-serif;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 7vw;
+                text-transform: capitalize;
+                font-weight: bolder;
+                text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
+
+}
+#Main{ 
+    /*Size modules */
+        width: 80%;
+        margin: 0 auto;
+        height: 80%;
+        padding: 5px;
+        /*Look modules */
+            border: 2px solid black;
+            background-color: pink;
+    /* */
 }
