@@ -56,7 +56,7 @@
                 if($_SESSION["role"] == "Student")
                 {
                     echo "<script>console.log('redirect naar 2, 10');</script>";
-                    header("Refresh: 2;URL=index.php?paginaNr=10");
+                    header("Refresh: 5;URL=index.php?paginaNr=10");
                 }
                 if($_SESSION["role"] == "Teacher")
                 {
