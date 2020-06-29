@@ -14,7 +14,8 @@
                 for($i = 0; $i < count($_SESSION["tasks"]); $i++)
                 {
                     $numOne = $_SESSION["tasks"][$i];
-                    $currentOperator = $_SESSION["tasks"][$i+1];
+                    //$currentOperator = $_SESSION["tasks"][$i+1];
+                    $currentOperator = GetOperator($_GET["curOp"]);
                     $numTwo = $_SESSION["tasks"][$i+2];
                     $answer = $_POST["answer$i"];
 
@@ -69,13 +70,23 @@
                                                         VALUES (:Guid, :UserID, :Activity, :Time)");
                     
                     $sth->execute($parameters);
+
+
+                    // Resultaten Pagina
+                    echo "<p>Je hebt $totalCorrectAnswers van de " . ($totalCorrectAnswers+$totalFailedAnswers) . " vragen goed.";
+                    echo "<br /><br />";
+                    echo "Keer terug naar <a href='./index.php?paginaNr=10'>Opdrachten</a>";
                 }
             }
             else
             {
                 // opdracht is nog niet gesubmit
                 TaskSetup($pdo);
-                GenerateTasks(10);
+                echo "<script>console.log('" . $_GET["curOp"] . "');</script>";
+                if(isset($_GET["curOp"]))
+                    GenerateTasks(10, GetOperator($_GET["curOp"]));
+                else
+                    GenerateTasks(10);
                 require("./Forms/OpdrachtenForm.php");
             }
         }
