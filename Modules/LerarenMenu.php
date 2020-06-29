@@ -1,34 +1,15 @@
 <?php
     if(LoginCheck($pdo))
     {
+        // TODO: Student naar Teacher veranderen
         if($_SESSION["role"] == "Student")
         {
             // Hier komt de leraren pagina
-            echo "<h2>Activiteiten Logboek</h2>";
-            $sth = $pdo->prepare("SELECT Activity, Time FROM activities ORDER BY Time DESC");
-            $sth->execute();
+            
+            // laad het activiteiten logboek
+            require("./Forms/ActiviteitenLogboek.php");
 
-            echo
-            "
-            <table>
-                <tr>
-                    <th>Activiteit<th>
-                    <th>Datum</th>
-                </tr>
-            ";
-            while($row = $sth->fetch())
-            {
-                echo "<tr>";
-                echo "<td>" . $row["Activity"] . "</td>";
-                echo "<td>" . $row["Time"] . "</td>";
-                echo "</tr>";
-            }
-            echo
-            "
-            </table>
-            ";
-
-
+            
         }
         elseif($_SESSION["role"] == "Student")
         {
