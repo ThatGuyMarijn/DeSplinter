@@ -7,9 +7,11 @@
             // Hier komt de leraren pagina
             
             // laad het activiteiten logboek
-            require("./Forms/ActiviteitenLogboek.php");
+            require("./Modules/ActiviteitenLogboek.php");
 
-            
+            // laad de klassen
+
+
         }
         elseif($_SESSION["role"] == "Student")
         {
