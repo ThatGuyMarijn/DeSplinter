@@ -7,6 +7,8 @@ body{
     height: 100%; 
     font-family: Roboto, Arial, Helvetica, sans-serif;
     text-align: left; 
+    min-width: 700px;
+    min-height: 373px;
 }
 
 #MainNav{
@@ -29,7 +31,7 @@ body{
                 font-family: Roboto, Arial, Helvetica, sans-serif;
                 text-align: center;
                 vertical-align: middle;
-                font-size: 13vmin;
+                font-size: 7vmax;
                 text-transform: capitalize;
                 font-weight: bolder;
                 text-shadow: -2px 0 yellow, 0 2px yellow, 2px 0 yellow, 0 -2px yellow;
